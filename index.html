@@ -29,14 +29,14 @@
     <script>
         document.addEventListener('DOMContentLoaded', function() {
             const urlParams = new URLSearchParams(window.location.search);
-            const base64Markdown = urlParams.get('md');
+            const encodedMarkdown = urlParams.get('md');
 
-            if (base64Markdown) {
-                const decodedMarkdown = atob(base64Markdown);
+            if (encodedMarkdown) {
+                const decodedMarkdown = decodeURIComponent(encodedMarkdown);
                 const htmlContent = marked.parse(decodedMarkdown);
                 document.getElementById('content').innerHTML = htmlContent;
             } else {
-                document.getElementById('content').innerHTML = '<p>No markdown content provided. Use the "md" URL parameter with base64 encoded markdown.</p>';
+                document.getElementById('content').innerHTML = '<p>No markdown content provided. Use the "md" URL parameter with URL encoded markdown.</p>';
             }
         });
     </script>
